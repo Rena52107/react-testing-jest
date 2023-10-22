@@ -16,7 +16,7 @@ test('it shows two inputs and a button', () => {
   expect(button).toBeInTheDocument();
 });
 
-test('it calls onUserAdd when the form is submitted', async () => {
+test('it calls onUserAdd when the form is submitted', () => {
   // NOT THE BEST IMPLEMENTATION
   const mock = jest.fn();
 
@@ -27,12 +27,12 @@ test('it calls onUserAdd when the form is submitted', async () => {
   const [nameInput, emailInput] = screen.getAllByRole('textbox');
 
   // Simulate typing in a name
-  await user.click(nameInput);
-  await user.keyboard('jane');
+  user.click(nameInput);
+  user.keyboard('jane');
 
   // Simulate typing in an email
-  await user.click(emailInput);
-  await user.keyboard('jane@jane.com');
+  user.click(emailInput);
+  user.keyboard('jane@jane.com');
 
   // Find the button
   const button = screen.getByRole('button');
@@ -42,5 +42,5 @@ test('it calls onUserAdd when the form is submitted', async () => {
 
   // Assertion to make sure 'onUserAdd' gets called with email/name
   expect(mock).toHaveBeenCalled();
-  expect(mock).toHaveBeenCalledWith({name: 'jane', email: 'jane@jane.com'});
+  expect(mock).toHaveBeenCalledWith({ name: 'jane', email: 'jane@jane.com' });
 });
